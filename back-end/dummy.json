@@ -7,6 +7,8 @@
     { "username": "Bilguun", "age": 25 },
     { "username": "uyanga", "age": "18" },
     { "username": "khuslen", "age": "18" },
-    { "username": "BIlgee", "age": "26" }
+    { "username": "BIlgee", "age": "26" },
+    { "username": "a", "age": "a" },
+    { "username": "aw", "age": "aw" }
   ]
 }
