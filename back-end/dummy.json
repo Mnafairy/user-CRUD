@@ -1,0 +1,12 @@
+{
+  "products": [{ "name": "macbook", "price": 10000 }],
+  "users": [
+    { "username": "Orgil", "age": 25 },
+    { "username": "Boldoo", "age": 15 },
+    { "username": "Temuulen", "age": 18 },
+    { "username": "Bilguun", "age": 25 },
+    { "username": "uyanga", "age": "18" },
+    { "username": "khuslen", "age": "18" },
+    { "username": "BIlgee", "age": "26" }
+  ]
+}
