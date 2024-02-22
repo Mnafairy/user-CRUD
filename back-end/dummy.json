@@ -1,14 +1,11 @@
 {
-  "products": [{ "name": "macbook", "price": 10000 }],
   "users": [
-    { "username": "Orgil", "age": 25 },
-    { "username": "Boldoo", "age": 15 },
-    { "username": "Temuulen", "age": 18 },
-    { "username": "Bilguun", "age": 25 },
-    { "username": "uyanga", "age": "18" },
-    { "username": "khuslen", "age": "18" },
-    { "username": "BIlgee", "age": "26" },
-    { "username": "a", "age": "a" },
-    { "username": "aw", "age": "aw" }
+    { "username": "Orgil", "age": "25", "id": "nXw-zAKFSEejtfQ3GtyL7" },
+    { "username": "Khuslen", "age": "18", "id": "uN7DjEz3bstFrRrWj1WCj" },
+    { "username": "Bilgee", "age": "25", "id": "mVTJ-DJku8zvGuSfYvHjS" },
+    { "username": "Uyanga", "age": "22", "id": "1soLkw0BmAz9fUMiQ8o8J" },
+    { "username": "", "age": "", "id": "pv9b9yDdV_fuLY90mCyXv" },
+    { "username": "", "age": "", "id": "smFhFbnpee6ga051YZzxt" },
+    { "username": "1", "age": "111", "id": "-gAKNE7dgTuF68OC6GffI" }
   ]
 }

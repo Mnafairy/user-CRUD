@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { nanoid } from "nanoid";
 export default function Home({ data }) {
   const BE_URL = "http://localhost:3001/add-user";
+  const DELETE_URL = "http://localhost:3001/delete-user";
   const [use, setUse] = useState(data.users);
   const [user, setUser] = useState([]);
-  console.log("data:", data);
+  const newid = nanoid();
   async function handleSubmit(e) {
     e.preventDefault();
     const data = {
       username: e.target.username.value,
       age: e.target.age.value,
+      id: newid,
     };
     const options = {
       method: "POST",
@@ -24,8 +27,18 @@ export default function Home({ data }) {
     console.log(FETCHED_JSON);
   }
   return (
-    <div>
-      <div className="w-[250px] m-auto p-4 bg-rose-400 rounded-lg text-xl">
+    <div className="flex items-center justify-center">
+      {/* <div>
+        {use.map((e, index) => {
+          return (
+            <div key={index}>
+              <h1>{e.username}</h1>
+              <p>{e.age}</p>
+            </div>
+          );
+        })}
+      </div> */}
+      <div className="w-[250px] p-4 bg-rose-400 rounded-lg text-xl">
         <div>
           {user.map((e, index) => {
             return (
@@ -52,16 +65,6 @@ export default function Home({ data }) {
           />
         </form>
       </div>
-      <div>
-        {use.map((e, index) => {
-          return (
-            <div key={index}>
-              <h1>{e.username}</h1>
-              <p>{e.age}</p>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 }
@@ -69,7 +72,6 @@ export default function Home({ data }) {
 export async function getServerSideProps(context) {
   const response = await fetch("http://localhost:3001/users");
   const data = await response.json();
-  console.log(data);
   return {
     props: {
       data,
