@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 export default function Home({ data }) {
   const BE_URL = "http://localhost:3001/add-user";
   const DELETE_URL = "http://localhost:3001/delete-user";
+  const UPDATE_URL = "http://localhost:3001/update-user";
   const [use, setUse] = useState(data.users);
   const [user, setUser] = useState([]);
   const newid = nanoid();
@@ -30,11 +31,9 @@ export default function Home({ data }) {
 
   async function handleDelete(e) {
     e.preventDefault();
-    console.log("e:", e);
     const data = {
       id: e.target.id,
     };
-    console.log(data);
     const options = {
       method: "POST",
       headers: {
@@ -43,39 +42,28 @@ export default function Home({ data }) {
       body: JSON.stringify(data),
     };
     const FETCHED_DATA = await fetch(DELETE_URL, options);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    console.log("fetchdata:", FETCHED_JSON);
+    setUser(FETCHED_JSON);
+    setUse(FETCHED_JSON);
+  }
+  async function handleEdit(e) {
+    e.preventDefault();
+    const data = { username: e.target.username.value };
+    const options = {
+      method: "POST",
+      headers: {
+        "Conent-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    const FETCHED_DATA = await fetch(UPDATE_URL, options);
+    const FETCHED_JSON = await FETCHED_DATA.json();
+    setUser(FETCHED_JSON.users);
   }
   return (
     <div className="flex items-center justify-center">
-      {/* <div>
-        {use.map((e, index) => {
-          return (
-            <div key={index}>
-              <h1>{e.username}</h1>
-              <p>{e.age}</p>
-            </div>
-          );
-        })}
-      </div> */}
-      <div className="w-[250px] p-4 bg-rose-400 rounded-lg text-xl">
-        <div>
-          {user.map((e, index) => {
-            return (
-              <div key={index} className="p-2 border-2">
-                <h1>{e.username}</h1>
-                <p>{e.age}</p>
-                <button
-                  id={e.id}
-                  onClick={(e) => {
-                    console.log("target.id:", e.target.id);
-                    handleDelete(e);
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            );
-          })}
-        </div>
+      <div className="flex flex-col gap-4 w-[250px] p-4 bg-rose-400 rounded-lg text-xl">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <label htmlFor="username">
             Username:
@@ -91,7 +79,45 @@ export default function Home({ data }) {
             className=" bg-white rounded-md w-[100px] m-auto cursor-pointer "
           />
         </form>
+        <div className="flex flex-col gap-2">
+          {user.map((e, index) => {
+            return (
+              <div key={index} className="p-2 border-2 bg-white rounded-lg">
+                <h1>{e.username}</h1>
+                <p>{e.age}</p>
+                <button
+                  id={e.id}
+                  onClick={(e) => {
+                    handleDelete(e);
+                  }}
+                >
+                  Delete
+                </button>
+                <button className="ml-2" id={e.id} onClick={(e) => {}}>
+                  Edit
+                </button>
+              </div>
+            );
+          })}
+          <form onSubmit={handleEdit(user.id)}>
+            <label htmlFor="edit">
+              Edit:
+              <input type="text" name="edit" />
+            </label>
+            <input type="submit" value="submit" />
+          </form>
+        </div>
       </div>
+      {/* <div>
+        {use.map((e, index) => {
+          return (
+            <div key={index}>
+              <h1>{e.username}</h1>
+              <p>{e.age}</p>
+            </div>
+          );
+        })}
+      </div> */}
     </div>
   );
 }

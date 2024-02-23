@@ -50,7 +50,17 @@ app.post("/delete-user", (req, res) => {
 });
 
 app.post("/update-user", (req, res) => {
-  const { id, updateData } = req.body;
+  const { id, username, age } = req.body;
+  const newUsers = req.body;
+  fs.writeFile("dummy.json", JSON.stringify({ users: newUsers }), (err) => {
+    if (err) {
+      console.log(err);
+      res.send("error happened");
+    } else {
+      console.log("success");
+      res.send(JSON.stringify(newUsers));
+    }
+  });
 });
 
 app.get("/users", (req, res) => {
