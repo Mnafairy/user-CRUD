@@ -6,21 +6,7 @@ app.use(bodyParser.json());
 const fs = require("fs");
 const cors = require("cors");
 app.use(cors());
-console.log("users:", users);
 
-// const writefile = (e) => {
-//   const jsonFile = JSON.parse(data.toString());
-//   jsonFile.users.push(e);
-//   return fs.writeFile("dummy.json", JSON.stringify(jsonFile), (err) => {
-//     if (err) {
-//       console.log(err);
-//       res.send("error happened");
-//     } else {
-//       console.log("success");
-//       res.send(JSON.stringify(e));
-//     }
-//   });
-// };
 app.post("/add-user", (req, res) => {
   const newUser = req.body;
   console.log("newUser:", newUser);
@@ -37,7 +23,6 @@ app.post("/add-user", (req, res) => {
             res.send("error happened");
           } else {
             console.log("success");
-            // res.send("User added successfully");
             res.send(JSON.stringify(jsonFile));
           }
         });
@@ -50,18 +35,6 @@ app.post("/add-user", (req, res) => {
   });
 });
 
-// app.get("/read-new-user", (req, res) => {
-//   fs.readFile("dummy.txt", (error, data) => {
-//     if (error) {
-//       console.log("Error in reading file");
-//     } else {
-//       const jsonFile = JSON.parse(data.toString());
-//       jsonFile.users.push(newUser);
-//       res.status(200);
-//       res.send(data);
-//     }
-//   });
-// });
 app.post("/delete-user", (req, res) => {
   const idToDelete = req.body.id;
   const newUsers = users.filter((e) => e.id != idToDelete);
@@ -96,12 +69,3 @@ app.get("/users", (req, res) => {
 app.listen(3001, () => {
   console.log("server is listening at port 3001");
 });
-
-// const userx = {
-//   name: "Orgil",
-//   age: 25,
-//   email: "mnafairy@gmail.com",
-// };
-// const updateData = { name: "Khuslen", age: 18 };
-// const updatedData = { ...userx, ...updateData };
-// console.log(updatedData);

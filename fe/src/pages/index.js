@@ -6,6 +6,7 @@ export default function Home({ data }) {
   const [use, setUse] = useState(data.users);
   const [user, setUser] = useState([]);
   const newid = nanoid();
+
   async function handleSubmit(e) {
     e.preventDefault();
     const data = {
@@ -26,6 +27,23 @@ export default function Home({ data }) {
     setUse(FETCHED_JSON.users);
     console.log(FETCHED_JSON);
   }
+
+  async function handleDelete(e) {
+    e.preventDefault();
+    console.log("e:", e);
+    const data = {
+      id: e.target.id,
+    };
+    console.log(data);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    const FETCHED_DATA = await fetch(DELETE_URL, options);
+  }
   return (
     <div className="flex items-center justify-center">
       {/* <div>
@@ -42,9 +60,18 @@ export default function Home({ data }) {
         <div>
           {user.map((e, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="p-2 border-2">
                 <h1>{e.username}</h1>
                 <p>{e.age}</p>
+                <button
+                  id={e.id}
+                  onClick={(e) => {
+                    console.log("target.id:", e.target.id);
+                    handleDelete(e);
+                  }}
+                >
+                  Delete
+                </button>
               </div>
             );
           })}
