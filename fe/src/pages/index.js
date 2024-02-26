@@ -25,8 +25,7 @@ export default function Home({ data }) {
     const FETCHED_DATA = await fetch(BE_URL, options);
     const FETCHED_JSON = await FETCHED_DATA.json();
     setUser(FETCHED_JSON.users);
-    setUse(FETCHED_JSON.users);
-    console.log(FETCHED_JSON);
+    // setUse(FETCHED_JSON.users);
   }
 
   async function handleDelete(e) {
